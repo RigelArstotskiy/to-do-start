@@ -6,15 +6,19 @@
     <title>To-Do-Start</title>
   </head>
   <body>
-    <div>
-      <form action="/submit">
-        <div>
-          <input type="text">
-        </div>
-        <button>
-          save
+
+    <div class="form-container">
+      <form class="form">
+        <input type="text" placeholder="Дай мне текст" name="text-to-save">
+
+        <button type="submit" class="saveBtn">
+          Save
         </button>
+
       </form>
     </div>
+
+    <script type="module" src="./src/main.js"></script>
+
   </body>
 </html>
