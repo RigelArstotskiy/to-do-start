@@ -3,6 +3,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 console.log(10)
 
 const form = document.querySelector('.form')//get a DOM element
+const cardContainer = document.querySelector('.card-show');
 
 form.addEventListener('submit', event => {//handler
     event.preventDefault();
@@ -35,3 +36,6 @@ const saved = localStorage.getItem('cards');
 const cards = saved ? JSON.parse(saved) : [];
 console.log(cards);//testing array
 
+cards.forEach(card => {
+    cardContainer.insertAdjacentHTML('beforeend', `<div class="card">${card.text}</div>`)
+});
