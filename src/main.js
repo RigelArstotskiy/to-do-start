@@ -29,13 +29,40 @@ form.addEventListener('submit', event => {//handler
 
     localStorage.setItem('cards', JSON.stringify(cards));
 
+    renderCard(trimCard)
+
     console.log(9, {trimCard});//testing, is button works as it suppose to
 })
 
+
+function renderCard(text) {
+  const cardHTML = `
+    <div class="card">
+      <span>${text}</span>
+      <button class="delete-btn">Удалить</button>
+    </div>
+  `;
+  cardContainer.insertAdjacentHTML('beforeend', cardHTML);
+}
+
 const saved = localStorage.getItem('cards');
-const cards = saved ? JSON.parse(saved) : [];
+let cards = saved ? JSON.parse(saved) : [];
+
 console.log(cards);//testing array
 
 cards.forEach(card => {
-    cardContainer.insertAdjacentHTML('beforeend', `<div class="card">${card.text}</div>`)
+    renderCard(card.text);
+});
+
+cardContainer.addEventListener('click', event => {
+    if (event.target.classList.contains('delete-btn')){
+    const cardElement = event.target.closest('.card');
+    const text = cardElement.querySelector('span').textContent;
+
+    cards = cards.filter(card => card.text !== text);
+
+    localStorage.setItem('cards', JSON.stringify(cards));
+
+    cardElement.remove();
+    }
 });
