@@ -17,3 +17,13 @@
   border-radius: 6px;
   cursor: pointer;
 }
+
+.main-board {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-cabin {
+  width: 200px;
+  background-color: aquamarine;
+}

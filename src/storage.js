@@ -14,20 +14,31 @@ function saveToLocalStorage() {
 
 export function getCards() {
   return cards;
-} //вернёт сам массив
+}
 
 export function addCard(card) {
   cards.push(card);
   saveToLocalStorage();
-} //сохраняем карточку в объекте, и затем в локальном хранилище
+}
 
 export function removeCardById(id) {
   cards = cards.filter((card) => card.id !== id);
   saveToLocalStorage();
-} //сделали функцию удаления карточки по айди
+}
 
-export function reorderCards(oldIndex, newIndex) {
-  const movedCard = cards.splice(oldIndex, 1)[0];
-  cards.splice(newIndex, 0, movedCard);
+export function updateCardColumn(id, newColumn) {
+  const card = cards.find((c) => c.id === id);
+  if (card) {
+    card.column = newColumn;
+    saveToLocalStorage();
+  }
+}
+
+export function updateColumnOrder(column, orderedIds) {
+  const columnCards = cards.filter((card) => card.column === column);
+  const newOrder = orderedIds
+    .map((id) => columnCards.find((c) => c.id === id))
+    .filter(Boolean);
+  cards = [...cards.filter((card) => card.column !== column), ...newOrder];
   saveToLocalStorage();
-} //д-н-д
+}
